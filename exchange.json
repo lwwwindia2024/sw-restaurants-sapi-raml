@@ -1,0 +1,10 @@
+{
+  "main": "sw-restaurants-sapi-raml.raml",
+  "name": "sw-restaurants-sapi-raml",
+  "groupId": "dbf43717-03d0-4c7c-b36b-37ff146429d7",
+  "assetId": "sw-restaurants-sapi-raml",
+  "version": "1.0.0",
+  "classifier": "raml",
+  "tags": [],
+  "descriptorVersion": "1.0.0"
+}
