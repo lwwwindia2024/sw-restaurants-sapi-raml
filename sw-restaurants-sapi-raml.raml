@@ -1,2 +1,44 @@
 #%RAML 1.0
 title: sw-restaurants-sapi-raml
+mediaType: 
+- application/json
+
+types:
+  Restaurant: !include datatypes/Restaurant.raml
+  RestaurantRequest: !include  datatypes/RestaurantRequest.raml
+  ErrorMessage: !include datatypes/ErrorMessage.raml
+
+/restaurants:
+  post:
+    body:
+      type: RestaurantRequest
+    responses:
+      201:
+        headers: 
+         Location:
+          description: URL of the newly created Restaurant
+          example: /restaurants/1
+        body:
+          type: Restaurant
+      409:
+        body:
+          type: ErrorMessage
+          example:
+              {              
+              "status": "409",
+              "message": "A restaurant with same name already exists"              
+              }
+          
+          
+      500:
+        body:
+          type: ErrorMessage
+          example:
+              {
+              
+              "status": "500",
+              
+              "message": "There was some server side problem. Please try later"
+              
+              }
+          
