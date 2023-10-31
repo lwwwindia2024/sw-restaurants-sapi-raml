@@ -6,6 +6,8 @@ mediaType:
 types:
   Restaurant: !include datatypes/Restaurant.raml
   RestaurantRequest: !include  datatypes/RestaurantRequest.raml
+  Menu: !include datatypes/Menu.raml
+  MenuRequest: !include datatypes/MenuRequest.raml
   ErrorMessage: !include datatypes/ErrorMessage.raml
   
 resourceTypes:
@@ -53,6 +55,25 @@ traits:
     get:
     put:
     delete:
+    /menus:
+      type: collection
+      get:
+        is: [Pageable]
+        description: get all menus of a restaurant 
+             
+      post:
+        responses:
+          404:
+            body:
+              type: ErrorMessage
+              example:
+                {
+
+                "status": "404",
+                
+                "message": "Restaurant with id {id} is NOT Found"
+                
+                }
               
     
           
