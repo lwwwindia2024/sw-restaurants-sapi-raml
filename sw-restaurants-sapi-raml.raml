@@ -7,30 +7,25 @@ types:
   Restaurant: !include datatypes/Restaurant.raml
   RestaurantRequest: !include  datatypes/RestaurantRequest.raml
   ErrorMessage: !include datatypes/ErrorMessage.raml
+  
+resourceTypes:
+  collection: !include resourceTypes/collection.raml
+traits:
+  Pageable: !include traits/Pageable.raml
 
 /restaurants:
+  type: collection
+    
   get:
+    is:
+      - Pageable
     queryParameters:
       name: 
         type: string
         required: false
         description: Restaurant name for filtering restaurants
-      page:
-        type: integer
-        required: false
-        default: 0
-        description: Page number to be retrieved
-      pageSize:
-        type: integer
-        required: false
-        default: 0
-        description: Page Size  
-    responses:
-      200:
-       body: 
-         type: array
-         items: Restaurant       
-           
+     
+    responses:          
       500:   
         body:
           application/json: 
@@ -41,17 +36,8 @@ types:
               "message": "There was some server side problem. Please try later"              
               }
       
-  post:
-    body:
-      type: RestaurantRequest
-    responses:
-      201:
-        headers: 
-         Location:
-          description: URL of the newly created Restaurant
-          example: /restaurants/1
-        body:
-          type: Restaurant
+  post:   
+    responses:  
       409:
         body:
           type: ErrorMessage
@@ -62,15 +48,5 @@ types:
               }
           
           
-      500:
-        body:
-          type: ErrorMessage
-          example:
-              {
-              
-              "status": "500",
-              
-              "message": "There was some server side problem. Please try later"
-              
-              }
+    
           
