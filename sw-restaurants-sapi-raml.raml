@@ -60,6 +60,18 @@ traits:
       get:
         is: [Pageable]
         description: get all menus of a restaurant 
+        responses:
+          404:
+            body:
+              type: ErrorMessage
+              example:
+                {
+
+                "status": "404",
+                
+                "message": "Restaurant with id {id} is NOT Found"
+                
+                }
              
       post:
         responses:
