@@ -8,6 +8,8 @@ types:
   RestaurantRequest: !include  datatypes/RestaurantRequest.raml
   Menu: !include datatypes/Menu.raml
   MenuRequest: !include datatypes/MenuRequest.raml
+  MenuItem: !include datatypes/MenuItem.raml
+  MenuItemRequest: !include datatypes/MenuItemRequest.raml
   ErrorMessage: !include datatypes/ErrorMessage.raml
   
 resourceTypes:
@@ -87,10 +89,31 @@ traits:
                 
                 }
       /{menuId}:
-        type: member
-          
+        type: member          
         get:
-          
-              
+        /menuItems:          
+          type: collection
+                  
+          get:  
+             responses:
+              404:
+                body:
+                  type: ErrorMessage
+                  example:
+                    {    
+                    "status": "404",                    
+                    "message": "Restaurant/Menu With id {id} is NOT Found"                   
+                    }       
+                
+          post: 
+            responses:
+              404:
+                body:
+                  type: ErrorMessage
+                  example:
+                    {    
+                    "status": "404",                    
+                    "message": "Restaurant/Menu With id {id} is NOT Found"         
+                    }
     
           

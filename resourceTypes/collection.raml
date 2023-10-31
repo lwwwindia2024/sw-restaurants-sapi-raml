@@ -28,7 +28,7 @@ post?:
     application/json:
       type: <<resourcePathName | !singularize | !uppercamelcase>>Request
   responses: 
-    201: 
+    201:  
       headers: 
         Location:
           description: URL of the new <<resourcePathName | !singularize>> information
