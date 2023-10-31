@@ -10,6 +10,7 @@ types:
   
 resourceTypes:
   collection: !include resourceTypes/collection.raml
+  member: !include resourceTypes/member.raml
 traits:
   Pageable: !include traits/Pageable.raml
 
@@ -47,6 +48,9 @@ traits:
               "message": "A restaurant with same name already exists"              
               }
           
-          
+  /{restaurantId}:
+    type: member
+    get:
+              
     
           
