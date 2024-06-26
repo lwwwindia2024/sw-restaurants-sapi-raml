@@ -1,0 +1,10 @@
+{
+  "main": "siva-restaurant-sapi.raml",
+  "name": "siva-restaurant-sapi",
+  "groupId": "4946dff8-6ac4-4b2f-b46c-a86e26c1ac4b",
+  "assetId": "siva-restaurant-sapi",
+  "version": "1.0.0",
+  "classifier": "raml",
+  "tags": [],
+  "descriptorVersion": "1.0.0"
+}
