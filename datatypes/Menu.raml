@@ -1,0 +1,9 @@
+#%RAML 1.0 DataType
+properties:
+  menuId: integer
+  name: string
+  restaurantId: integer
+  links: 
+    type: array
+    items: !include Link.raml
+example: !include ../examples/MenuExample.raml 

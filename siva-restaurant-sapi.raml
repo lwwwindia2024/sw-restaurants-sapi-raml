@@ -1,2 +1,130 @@
 #%RAML 1.0
-title: siva-restaurant-sapi
+title: sw-restaurants-sapi-raml
+mediaType: 
+- application/json
+
+types:
+  Restaurant: !include datatypes/Restaurant.raml
+  RestaurantRequest: !include  datatypes/RestaurantRequest.raml
+  Menu: !include datatypes/Menu.raml
+  MenuRequest: !include datatypes/MenuRequest.raml
+  MenuItem: !include datatypes/MenuItem.raml
+  MenuItemRequest: !include datatypes/MenuItemRequest.raml
+  Inventory: !include datatypes/MenuItemInventory.raml
+  InventoryRequest: !include datatypes/MenuItemInventory.raml
+  ErrorMessage: !include datatypes/ErrorMessage.raml
+  
+resourceTypes:
+  collection: !include resourceTypes/collection.raml
+  member: !include resourceTypes/member.raml
+traits:
+  Pageable: !include traits/Pageable.raml
+
+/restaurants:
+  type: collection
+    
+  get:
+    is:
+      - Pageable
+    queryParameters:
+      name: 
+        type: string
+        required: false
+        description: Restaurant name for filtering restaurants
+     
+    responses:          
+      500:   
+        body:
+          application/json: 
+            type: ErrorMessage
+            example:
+              {              
+              "status": "500",              
+              "message": "There was some server side problem. Please try later"              
+              }
+      
+  post:   
+    responses:  
+      409:
+        body:
+          type: ErrorMessage
+          example:
+              {              
+              "status": "409",
+              "message": "A restaurant with same name already exists"              
+              }
+          
+  /{restaurantId}:
+    type: member
+    get:
+    put:
+    delete:
+    /menus:
+      type: collection
+      get:
+        is: [Pageable]
+        description: get all menus of a restaurant 
+        responses:
+          404:
+            body:
+              type: ErrorMessage
+              example:
+                {
+
+                "status": "404",
+                
+                "message": "Restaurant with id {id} is NOT Found"
+                
+                }
+             
+      post:
+        responses:
+          404:
+            body:
+              type: ErrorMessage
+              example:
+                {
+
+                "status": "404",
+                
+                "message": "Restaurant with id {id} is NOT Found"
+                
+                }
+      /{menuId}:
+        type: member          
+        get:
+        /menuItems:          
+          type: collection
+                  
+          get:  
+             responses:
+              404:
+                body:
+                  type: ErrorMessage
+                  example:
+                    {    
+                    "status": "404",                    
+                    "message": "Restaurant/Menu With id {id} is NOT Found"                   
+                    }       
+                
+          post: 
+            responses:
+              404:
+                body:
+                  type: ErrorMessage
+                  example:
+                    {    
+                    "status": "404",                    
+                    "message": "Restaurant/Menu With id {id} is NOT Found"         
+                    }
+          /{menuItemId}:
+            type: member
+            get:
+            put:
+            delete:
+            /inventory:
+              type: member                
+              get:
+              put:
+    
+          
